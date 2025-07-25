@@ -1,12 +1,16 @@
 import { useState,useEffect,useContext } from 'react';
 import { socket } from './socket.js';
 import { RoomContext } from './roomContext.jsx';
+import { useNavigate } from 'react-router';
+import { PlayerContext } from './playerContext.jsx';  
 
 function Rooms({host,setHost}) {  
   let [name,setName] = useState("");
-  let[roomId,setRoomId] = useState("");
+  //this is the room id that the user wants to join
+  let [roomId,setRoomId] = useState("");
   const {roomData,setRoomData} = useContext(RoomContext);
-
+  const {PlayerData,setPlayerData} = useContext(PlayerContext);
+  const navigate = useNavigate();
   //handle the create / join game  by emiting events
   let handleCreateGame = () => {
     socket.emit("createRoom", { hostName: name });
@@ -21,21 +25,25 @@ function Rooms({host,setHost}) {
       });
 
     // Listen for room creation events  
-    const handleRoomCreated = (roomId) => {
-      setRoomId(roomId);
+    const handleRoomCreated = (playerData) => {
+      setPlayerData(playerData); // Set player data in context
+      navigate("/waiting"); // Navigate to the waiting page
+      
     };
     socket.on("roomCreated", handleRoomCreated);
 
     //listen for room join events
-    const handleRoomJoined = () => {
+    const handleRoomJoined = (playerData) => {
+      setPlayerData(playerData); // Set player data in context
       //route to another root
-      }
+      navigate("/waiting");  
+    }
       socket.on("roomJoined", handleRoomJoined);
 
     //listen for room updates
     socket.on("roomUpdated", (data) => {
       setRoomData(data);
-      console.log(data);
+
     });
 
     return () => {
@@ -43,7 +51,7 @@ function Rooms({host,setHost}) {
       socket.off("roomJoined", handleRoomJoined); 
       socket.off("roomUpdated");
     }; 
-  }, [roomData,setRoomData]);
+  }, [roomData,setRoomData,navigate,setPlayerData]);
 
   return (
     <div className='bg-lico  w-80 text-white mt-5 mx-auto p-5 rounded-md flex flex-col '>
