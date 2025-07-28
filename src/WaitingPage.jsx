@@ -17,19 +17,28 @@ const handleLeaveRoom = () => {
   // Navigate back to the rooms page  
   navigate(-1);
 }
-
+const handleStartGame = () => {
+  //emit an event to backend to start game
+  socket.emit("startgame",{roomId: roomData.roomId});
+}
 useEffect(() => {
     socket.on("roomUpdated", (data) => {
       setRoomData(data);
     })
     socket.on("disconnect", () => {
-
       console.log("disconnected from server");
     });
+    socket.on("gameStarted", (data) => {
+      setRoomData(data);
+      navigate("/game");
+    });
+
       return () => {
       socket.off("roomUpdated");
+      socket.off("disconnect");
+      socket.off("gameStarted");
 }
-}, [setRoomData,roomData]);
+}, [setRoomData,roomData,navigate]);
 
   return (
     <div className='flex flex-col bg-lico w-screen h-screen items-center  justify-start text-white '>
@@ -53,7 +62,7 @@ useEffect(() => {
        })
     }  
     {PlayerData.isHost ?
-    <button className='bg-bordo rounded-lg mt-10 text-white p-2 h-1/6'>start game</button>
+    <button onClick={() => {handleStartGame()}} className='bg-bordo rounded-lg mt-10 text-white p-2 h-1/6'>start game</button>
   :
   <div className='mt-6 h-1/6'><p className='text-white    text-md'>waiting for host to start the game </p>
    <div className="flex items-center justify-center gap-1 mt-2">

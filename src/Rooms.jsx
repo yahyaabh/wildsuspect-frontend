@@ -21,7 +21,7 @@ function Rooms({host,setHost}) {
 
   useEffect(() => {
     socket.on("connect", () => {
-        console.log("Connected to the server");
+      console.log("Connected to the server");
       });
 
     // Listen for room creation events  
