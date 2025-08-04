@@ -28,8 +28,11 @@ useEffect(() => {
     socket.on("disconnect", () => {
       console.log("disconnected from server");
     });
-    socket.on("gameStarted", (data) => {
-      setRoomData(data);
+    socket.on("playerDataUpdated", (playerData) => {
+      setPlayerData(playerData);
+    });
+    socket.on("gameStarted", (roomData) => {
+      setRoomData(roomData);
       navigate("/game");
     });
 
@@ -38,7 +41,7 @@ useEffect(() => {
       socket.off("disconnect");
       socket.off("gameStarted");
 }
-}, [setRoomData,roomData,navigate]);
+}, [setRoomData,roomData,navigate,setPlayerData]);
 
   return (
     <div className='flex flex-col bg-lico w-screen h-screen items-center  justify-start text-white '>
