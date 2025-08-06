@@ -6,6 +6,7 @@ import { RoomProvider } from "./roomContext";
 import { PlayerProvider } from "./playerContext";
 import WaitingPage from "./WaitingPage";
 import Game from "./Game";
+import VotingPage from "./VotingPage";
 
 createRoot(document.getElementById('root')).render(
   <RoomProvider>
@@ -15,6 +16,7 @@ createRoot(document.getElementById('root')).render(
           <Route path="/" element={<Welcome/>} />
           <Route path="/waiting" element={<WaitingPage/>} />
           <Route path="/game" element={<Game/>} />
+          <Route path="/voting" element={<VotingPage/>} />
         </Routes> 
       </BrowserRouter>
     </PlayerProvider>

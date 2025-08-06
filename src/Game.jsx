@@ -2,20 +2,16 @@ import React from 'react'
 import { useContext } from 'react'
 import { PlayerContext } from './playerContext'
 import { RoomContext } from './roomContext';
-import { useEffect ,useState} from 'react';
+import {  useState} from 'react';
 import { FaRegQuestionCircle } from "react-icons/fa";
-
+import { Link } from 'react-router-dom';
 
 
 function Game() {
   const { PlayerData } = useContext(PlayerContext);
   const {roomData} = useContext(RoomContext);
   const [flipped,setFlipped] =useState(false);
-    useEffect(() => {
-      console.log(PlayerData);
-      console.log(roomData);
-    }
-  ,[PlayerData, roomData]);
+   
   return (
     <div className='w-screen h-screen bg-white flex flex-col items-center justify-center '>
         {PlayerData.knowsAnimal ?
@@ -28,7 +24,7 @@ function Game() {
         <div className="flip-inner w-full h-full rounded-md shadow-md ">
           {/* Front Side */}
           <div className="flip-front text-center  flex flex-col items-center justify-center">
-            <p className="font-bold text-xl my-4">You are not the impostor.</p>
+            <p className="font-bold text-xl my-4">You are not the impostor😇.</p>
             <p className="text-xl text-slate-200">
               The animal you got is the{' '}
               <span className="text-melon font-extrabold">{roomData.animal}</span>
@@ -57,7 +53,7 @@ function Game() {
         <div className="flip-inner w-full h-full rounded-md shadow-md ">
           {/* Front Side */}
           <div className="flip-front text-center flex flex-col items-center justify-center">
-            <p className="font-bold text-xl my-4">You are  the impostor.</p>
+            <p className="font-bold text-xl my-4">You are the <span className='text-melon'>impostor</span>😈.</p>
             <p className="my-4 font-bold">Good luck!</p>
             <FaRegQuestionCircle className='size-8 animate-pulse'/>
           </div>
@@ -72,6 +68,9 @@ function Game() {
         </div>
       </div>
       }
+
+      
+      <Link className='bg-bordo rounded-lg mt-10 text-white p-2 ' to="../voting">Vote 🕵️‍♂️</Link>
   </div>
   )
 }
