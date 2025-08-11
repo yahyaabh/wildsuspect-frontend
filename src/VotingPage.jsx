@@ -22,10 +22,8 @@ function VotingPage() {
 
     useEffect(() => {
         socket.on("userHasVoted", (nbOfVotes) => {
-            console.log(nbOfVotes);
-            console.log(roomData.players.length);
             if(nbOfVotes == roomData.players.length) {
-                navigate("../results");
+                navigate("../RevealingPage");
             }
         }
     )

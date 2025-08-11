@@ -5,13 +5,24 @@ import { RoomContext } from './roomContext';
 import {  useState} from 'react';
 import { FaRegQuestionCircle } from "react-icons/fa";
 import { Link } from 'react-router-dom';
-
+import { useEffect } from 'react';
+import { socket } from './socket.js';
 
 function Game() {
-  const { PlayerData } = useContext(PlayerContext);
+  const { PlayerData ,setPlayerData} = useContext(PlayerContext);
   const {roomData} = useContext(RoomContext);
   const [flipped,setFlipped] =useState(false);
    
+useEffect( () => {
+  socket.emit("updatePlayerData");
+  socket.on("playerDataUpdated", (playerData) => {
+    setPlayerData(playerData);
+
+})
+}
+
+,[])
+
   return (
     <div className='w-screen h-screen bg-white flex flex-col items-center justify-center '>
         {PlayerData.knowsAnimal ?

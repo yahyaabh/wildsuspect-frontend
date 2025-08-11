@@ -20,6 +20,7 @@ const handleLeaveRoom = () => {
 const handleStartGame = () => {
   //emit an event to backend to start game
   socket.emit("startgame",{roomId: roomData.roomId});
+  
 }
 useEffect(() => {
     socket.on("roomUpdated", (data) => {
