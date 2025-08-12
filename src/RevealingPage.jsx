@@ -25,7 +25,6 @@ const navigate = useNavigate();
 }
 
  let getImpostor = () => {
-    console.log(roomData)
     roomData.players.forEach((player) => {
         if(player.knowsAnimal == false) {
             setImpostor(player);
