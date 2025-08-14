@@ -21,6 +21,7 @@ const navigate = useNavigate();
     else {
         setGuess("wrong");
     }
+
     socket.emit("impostorPickedAnimal",{animal:animal});
 }
 
@@ -44,7 +45,10 @@ const navigate = useNavigate();
     })
     //when the impostor has guessed, navigate to results page
     socket.on("impostorHasGuessed", () => {
-        navigate("../results");
+        setTimeout(()=> {
+            navigate("../results");
+        },2000)
+        
     })
     return () => {
         socket.off("animalsArraySent");

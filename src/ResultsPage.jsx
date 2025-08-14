@@ -5,16 +5,22 @@ import { useEffect } from 'react';
 import { socket } from './socket';
 import { PlayerContext } from './playerContext';
 import { LuRefreshCcw } from "react-icons/lu";
+import {useNavigate} from 'react-router-dom';
 function ResultsPage() {
     const {roomData,setRoomData} = useContext(RoomContext);
     const {PlayerData} = useContext(PlayerContext);
+    const navigate = useNavigate();
+    const handlePLayAgain = () => {
+        socket.emit("playAgain");
+    }
     useEffect(() => {
         socket.emit("getResults");
         socket.on("roomUpdated", (data) => {
             setRoomData(data);
-            console.log(data);
+                })
+        socket.on("playingAgain",()=> {
+            navigate("../waiting")
         })
-
         return () => {
             socket.off("roomUpdated");
         }
@@ -31,7 +37,7 @@ function ResultsPage() {
         )}
         </div>
         {PlayerData.isHost?
-            <div className='bg-melon text-white p-2  rounded-md flex flex-row items-center justify-center cursor-pointer'>
+            <div onClick={()=> handlePLayAgain()} className='bg-melon text-white p-2  rounded-md flex flex-row items-center justify-center cursor-pointer'>
                 <p className='mr-2'>play again</p> 
                 <LuRefreshCcw/> 
                 </div>    
