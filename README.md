@@ -1,12 +1,25 @@
-# React + Vite
+# Wild Suspect
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A multiplayer game where one impostor doesnt know the animal other players do and they need to guess him.
 
-Currently, two official plugins are available:
+# project information
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+##Features
+-multiplayer rooms
+-real-time updates using socket.io
+-responsible ui using tailwind
 
-## Expanding the ESLint configuration
+##tech stack
+-Frontend: React, Vite, Tailwind CSS, Sockets
+-Backend: Node.js, Express.js, Socket.io
+-Deployment: Vercel (frontend), Render (backend)
 
-If you are developing a production application, we recommend using TypeScript and enable type-aware lint rules. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+##Usage
+-a player creates a room
+-other players join the room using the room code
+-the host(creator) starts the game
+-each player gets a card
+-the card reveals if they are impostor or not
+-players start asking question to find out the impostor then they vote
+-the impostor tries ti guess the animal
+-scores are shown and host can start the game again with the same players
