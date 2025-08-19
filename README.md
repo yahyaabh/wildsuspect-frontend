@@ -4,10 +4,10 @@ A multiplayer game where one impostor doesnt know the animal other players do an
 
 # project information
 
-##Features
--multiplayer rooms
--real-time updates using socket.io
--responsible ui using tailwind
+## Features
+- multiplayer rooms
+- real-time updates using socket.io
+- responsible ui using tailwind
 
 ## tech stack
 - Frontend: React, Vite, Tailwind CSS, Sockets
