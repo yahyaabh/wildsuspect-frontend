@@ -47,7 +47,7 @@ useEffect(() => {
   return (
     <div className='flex flex-col bg-lico w-screen h-screen items-center  justify-start text-white '>
       <div className='text-xl font-bold   font-mono bg-bordo text-white w-full flex flex-col items-center justify-around h-1/6   '> 
-        <button onClick={()=> handleLeaveRoom()} className=' text-sm font-black   border-1 border-white rounded-md p-2'>← leave</button>
+        <button onClick={()=> handleLeaveRoom()} className=' text-sm font-black   border-1 border-white rounded-md p-2'> ← leave</button>
        <p className=''>ROOM CODE : {roomData.roomId}</p>
       </div>
        <div className='flex flex-col items-center justify-start h-3/6 w-full mt-10'>
